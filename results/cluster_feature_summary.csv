@@ -1,0 +1,25 @@
+profile,feature,weighted_prevalence_pct
+Complex multi-condition,ADHD,83.05920839461984
+Complex multi-condition,Learning disability,84.00504942923521
+Complex multi-condition,Speech disorder,72.74348359567807
+Complex multi-condition,Intellectual disability,28.588295337418977
+Complex multi-condition,Developmental delay,90.3118745577466
+Complex multi-condition,Behavior problems,92.56973710765756
+Complex multi-condition,Depression,25.217443601183128
+Complex multi-condition,Anxiety,73.01795559806017
+Developmentally apparent,ADHD,14.40237046185206
+Developmentally apparent,Learning disability,68.51666739571434
+Developmentally apparent,Speech disorder,74.72800567890431
+Developmentally apparent,Intellectual disability,21.159759270508584
+Developmentally apparent,Developmental delay,82.00452326099037
+Developmentally apparent,Behavior problems,32.18383026706929
+Developmentally apparent,Depression,2.693605789544011
+Developmentally apparent,Anxiety,10.889716424967016
+Less-obvious overlapping,ADHD,63.37007087261416
+Less-obvious overlapping,Learning disability,16.458325957903302
+Less-obvious overlapping,Speech disorder,9.799805430465177
+Less-obvious overlapping,Intellectual disability,1.9110287196688238
+Less-obvious overlapping,Developmental delay,12.039756515985953
+Less-obvious overlapping,Behavior problems,42.05908411960518
+Less-obvious overlapping,Depression,23.408190358436993
+Less-obvious overlapping,Anxiety,55.21092737404199
