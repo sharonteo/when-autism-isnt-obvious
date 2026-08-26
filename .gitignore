@@ -1,0 +1,4 @@
+data/*.dta
+data/**/*.dta
+__pycache__/
+.streamlit/
