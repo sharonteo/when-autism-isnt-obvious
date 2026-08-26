@@ -12,8 +12,6 @@ K-modes clustering identified three reported profiles without using diagnosis ag
 
 The less-obvious overlapping profile combined mild reported severity, relatively little reported speech/developmental delay, and more ADHD/anxiety. Its later-diagnosis pattern appeared in every survey year. These are exploratory associations, not validated clinical subtypes or a prospective screening tool.
 
-The survey-weighted median diagnosis ages were 5 for girls and 4 for boys. The unweighted sample medians were 7 and 4, respectively; the dashboard uses the weighted result to avoid mixing estimands.
-
 ## Cohort definition
 
 - Caregiver reported that the child had ever been diagnosed with autism (`K2Q35A = Yes`)
@@ -21,7 +19,7 @@ The survey-weighted median diagnosis ages were 5 for girls and 4 for boys. The u
 - Child was at least age 5 at survey, ensuring an opportunity to experience the outcome
 - Outcome: first reported diagnosis after age 4
 
-Eligible pooled sample: **5,066 children**.
+Eligible clustering sample: **4,759 children** with a valid reported severity category.
 
 ## Run locally
 
@@ -31,14 +29,13 @@ Eligible pooled sample: **5,066 children**.
 
 ```bash
 pip install -r requirements.txt
-python analyze.py
 python cluster_analysis.py
 streamlit run app.py
 ```
 
 ## Responsible interpretation
 
-This project examines population-level patterns. It does not diagnose autism, estimate an individual child's need, or establish causation. Current treatment, reported severity, and service-use variables are excluded from the model to reduce post-diagnosis leakage. Full NSCH variance estimation should use the complex survey design variables and appropriate survey-analysis software.
+This project examines population-level patterns. It does not diagnose autism, estimate an individual child's needs, or establish causation. Reported severity and co-occurring conditions were measured at survey, not necessarily before autism diagnosis; the profiles therefore cannot be used as a prospective screening tool. Full NSCH variance estimation should use the complex survey design variables and appropriate survey-analysis software.
 
 ## Suggested LinkedIn story
 
