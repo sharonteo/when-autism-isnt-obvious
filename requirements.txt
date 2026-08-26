@@ -1,0 +1,6 @@
+pandas>=2.2
+numpy>=1.26
+pyreadstat>=1.2
+scikit-learn>=1.5
+streamlit>=1.40
+kmodes>=0.12
