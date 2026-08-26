@@ -1,0 +1,8 @@
+{
+  "eligible_records_with_valid_severity": 4759,
+  "clustering_method": "K-modes; three clusters; simple-matching dissimilarity",
+  "diagnosis_age_used_to_form_clusters": false,
+  "sample_silhouette_hamming": 0.27141846538564424,
+  "mean_seed_stability_adjusted_rand_index": 0.6579355083112649,
+  "interpretation": "Exploratory reported profiles, not validated clinical subtypes."
+}
