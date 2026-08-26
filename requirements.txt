@@ -4,3 +4,4 @@ pyreadstat>=1.2
 scikit-learn>=1.5
 streamlit>=1.40
 kmodes>=0.12
+matplotlib>=3.9
