@@ -55,26 +55,14 @@ yp=years.pivot(index="survey_year",columns="profile",values="weighted_later_pct"
 st.line_chart(yp,color=[COLORS[p] for p in ORDER]); st.dataframe(yp.style.format("{:.1f}%"),width="stretch")
 st.markdown("<div class='callout'><b>Yes.</b> The less-obvious overlapping profile had the highest later-diagnosis rate in 2022, 2023 and 2024.</div>",unsafe_allow_html=True)
 
-st.divider(); st.subheader("What the machine learning did—and did not do")
-left,right=st.columns(2)
-with left:
-    st.markdown("""**The algorithm used**
-- Reported autism severity
-- Speech and developmental differences
-- Learning and intellectual disabilities
-- ADHD, anxiety, depression and behavior concerns
+st.divider()
+st.caption("Exploratory associations from caregiver-reported survey data; these profiles are not clinical subtypes and do not explain why an individual child was diagnosed later.")
+with st.expander("Methods and limitations"):
+    st.markdown("""- **Cohort:** 4,759 children aged 5–17 with caregiver-reported autism.
 
-Diagnosis age was deliberately excluded while profiles were formed.""")
-with right:
-    st.markdown("""**Responsible interpretation**
-- Retrospective, cross-sectional survey analysis
-- Characteristics were reported at survey—not necessarily before diagnosis
-- Association does not establish why diagnosis occurred later
-- Profiles require validation in longitudinal clinical data""")
-with st.expander("Technical methods and stability"):
-    st.markdown("""- Cohort: 4,759 children aged 5–17 with caregiver-reported autism, valid diagnosis age and valid reported severity.
-- Method: K-modes clustering with three clusters and simple-matching dissimilarity.
-- Survey estimates: selected-child weight (`FWC`).
-- Mean adjusted Rand index across three seed fits: 0.658, indicating moderate—not perfect—stability.
-- These are exploratory reported profiles, not validated clinical phenotypes or a diagnostic model.""")
+- **Clustering method:** K-modes grouped children with similar categorical patterns, such as whether ADHD, anxiety, speech disorder or developmental delay was reported.
+
+- **Why diagnosis age was excluded:** Diagnosis age was hidden from the algorithm so that any age differences discovered afterward were not built into the groups.
+
+- **Limitation:** Characteristics were reported at survey and were not necessarily present or recognized before diagnosis.""")
 st.markdown("<p class='note'>Source: 2022–2024 National Survey of Children's Health, U.S. Census Bureau / HRSA Maternal and Child Health Bureau.</p>",unsafe_allow_html=True)
