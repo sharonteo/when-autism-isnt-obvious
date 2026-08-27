@@ -46,6 +46,22 @@ pivot=features[features.feature.isin(chosen)].pivot(index="feature",columns="pro
 st.dataframe(pivot.style.format("{:.0f}%").background_gradient(cmap="Blues",axis=None,vmin=0,vmax=100),width="stretch")
 st.caption("The profiles are exploratory combinations of caregiver-reported characteristics. They are not clinical autism subtypes.")
 
+st.divider(); st.subheader("Compare profiles")
+select_left, select_right = st.columns(2)
+with select_left:
+    profile_a = st.selectbox("Profile A", ORDER, index=0)
+with select_right:
+    profile_b = st.selectbox("Profile B", ORDER, index=2)
+
+row_a = profiles[profiles.profile == profile_a].iloc[0]
+row_b = profiles[profiles.profile == profile_b].iloc[0]
+age_gap = abs(row_b.weighted_median_diagnosis_age - row_a.weighted_median_diagnosis_age)
+rate_gap = abs(row_b.weighted_later_pct - row_a.weighted_later_pct)
+
+metric_left, metric_right = st.columns(2)
+metric_left.metric("Median diagnosis-age gap", f"{age_gap:.0f} years")
+metric_right.metric("Later-diagnosis-rate gap", f"{rate_gap:.1f} percentage points")
+
 st.divider(); st.subheader("Experience the difference")
 focus=st.radio("Choose a profile",ORDER,horizontal=True,index=2); row=profiles[profiles.profile==focus].iloc[0]
 st.markdown(icon_grid(row.weighted_later_pct),unsafe_allow_html=True)
