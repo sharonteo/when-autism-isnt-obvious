@@ -1,4 +1,5 @@
 from pathlib import Path
+import altair as alt
 import pandas as pd
 import streamlit as st
 
@@ -52,7 +53,26 @@ st.markdown(f"<p style='text-align:center'><b>{row.weighted_later_pct:.1f}%</b> 
 
 st.divider(); st.subheader("Did the pattern persist across years?")
 yp=years.pivot(index="survey_year",columns="profile",values="weighted_later_pct")[ORDER]
-st.line_chart(yp,color=[COLORS[p] for p in ORDER]); st.dataframe(yp.style.format("{:.1f}%"),width="stretch")
+year_chart = alt.Chart(years).mark_line(point=True, strokeWidth=3).encode(
+    x=alt.X("survey_year:O", title="Survey year"),
+    y=alt.Y(
+        "weighted_later_pct:Q",
+        title="Diagnosed after age 4 (%)",
+        scale=alt.Scale(domain=[0, 100]),
+    ),
+    color=alt.Color(
+        "profile:N",
+        scale=alt.Scale(domain=ORDER, range=[COLORS[p] for p in ORDER]),
+        legend=alt.Legend(title=None),
+    ),
+    tooltip=[
+        alt.Tooltip("survey_year:O", title="Survey year"),
+        alt.Tooltip("profile:N", title="Profile"),
+        alt.Tooltip("weighted_later_pct:Q", title="Diagnosed after age 4", format=".1f"),
+    ],
+).properties(height=360)
+st.altair_chart(year_chart, use_container_width=True)
+st.dataframe(yp.style.format("{:.1f}%"),width="stretch")
 st.markdown("<div class='callout'><b>Yes.</b> The less-obvious overlapping profile had the highest later-diagnosis rate in 2022, 2023 and 2024.</div>",unsafe_allow_html=True)
 
 st.divider()
