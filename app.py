@@ -37,14 +37,30 @@ for column,name in zip(st.columns(3),ORDER):
     with column:
         st.markdown(f"""<div class="profile" style="border-top:6px solid {COLORS[name]}"><h3>{name}</h3><div class="profile-subtitle">{PROFILE_DESCRIPTIONS[name]}</div><div class="age">Age {row.weighted_median_diagnosis_age:.0f}</div><div class="caption">weighted median first reported diagnosis age</div><br><b>{row.weighted_later_pct:.1f}%</b> diagnosed after age 4<br><span class="caption">{row.sample_n:,.0f} survey records</span></div>""",unsafe_allow_html=True)
 
-st.caption("Profile names summarize caregiver-reported patterns and are descriptive, not recognized clinical autism subtypes.")
+st.caption("Profile names summarize patterns found in caregiver-reported survey data; they are not official medical categories.")
 
 st.markdown("""<div class="callout"><b>The discovery:</b> The less-obvious overlapping profile had a weighted median diagnosis age of 7—four years later than the developmentally apparent profile.</div>""",unsafe_allow_html=True)
 st.subheader("What characterizes each reported profile?")
 chosen=["ADHD","Anxiety","Speech disorder","Developmental delay","Learning disability","Behavior problems"]
 pivot=features[features.feature.isin(chosen)].pivot(index="feature",columns="profile",values="weighted_prevalence_pct")[ORDER]
 st.dataframe(pivot.style.format("{:.0f}%").background_gradient(cmap="Blues",axis=None,vmin=0,vmax=100),width="stretch")
-st.caption("The profiles are exploratory combinations of caregiver-reported characteristics. They are not clinical autism subtypes.")
+st.caption("These profiles are exploratory patterns found in caregiver-reported survey data, not official medical categories.")
+
+st.divider(); st.subheader("Compare profiles")
+select_left, select_right = st.columns(2)
+with select_left:
+    profile_a = st.selectbox("Profile A", ORDER, index=0)
+with select_right:
+    profile_b = st.selectbox("Profile B", ORDER, index=2)
+
+row_a = profiles[profiles.profile == profile_a].iloc[0]
+row_b = profiles[profiles.profile == profile_b].iloc[0]
+age_gap = abs(row_b.weighted_median_diagnosis_age - row_a.weighted_median_diagnosis_age)
+rate_gap = abs(row_b.weighted_later_pct - row_a.weighted_later_pct)
+
+metric_left, metric_right = st.columns(2)
+metric_left.metric("Median diagnosis-age gap", f"{age_gap:.0f} years")
+metric_right.metric("Later-diagnosis-rate gap", f"{rate_gap:.1f} percentage points")
 
 st.divider(); st.subheader("Experience the difference")
 focus=st.radio("Choose a profile",ORDER,horizontal=True,index=2); row=profiles[profiles.profile==focus].iloc[0]
@@ -76,7 +92,7 @@ st.dataframe(yp.style.format("{:.1f}%"),width="stretch")
 st.markdown("<div class='callout'>The less-obvious overlapping profile had the highest later-diagnosis rate in all three survey years.</div>",unsafe_allow_html=True)
 
 st.divider()
-st.caption("Exploratory associations from caregiver-reported survey data; these profiles are not clinical subtypes and do not explain why an individual child was diagnosed later.")
+st.caption("Exploratory associations from caregiver-reported survey data; these profiles are not official medical categories and do not explain why an individual child was diagnosed later.")
 with st.expander("Methods and limitations"):
     st.markdown("""- **Cohort:** 4,759 children aged 5–17 with caregiver-reported autism.
 
