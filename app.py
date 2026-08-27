@@ -55,19 +55,14 @@ yp=years.pivot(index="survey_year",columns="profile",values="weighted_later_pct"
 st.line_chart(yp,color=[COLORS[p] for p in ORDER]); st.dataframe(yp.style.format("{:.1f}%"),width="stretch")
 st.markdown("<div class='callout'><b>Yes.</b> The less-obvious overlapping profile had the highest later-diagnosis rate in 2022, 2023 and 2024.</div>",unsafe_allow_html=True)
 
-st.divider(); st.subheader("How to interpret these findings")
-st.markdown("""- This was a retrospective, cross-sectional analysis of caregiver-reported survey data.
-- Characteristics were reported at the time of the survey and were not necessarily present or recognized before the autism diagnosis.
-- The analysis identified associations, but it cannot explain why an individual child was diagnosed later.
-- The profiles are exploratory and require validation using longitudinal clinical data.""")
-with st.expander("Technical methods"):
-    st.markdown("""- **Cohort:** 4,759 children aged 5–17 with caregiver-reported autism, a valid reported diagnosis age and a valid reported severity category.
+st.divider()
+st.caption("Exploratory associations from caregiver-reported survey data; these profiles are not clinical subtypes and do not explain why an individual child was diagnosed later.")
+with st.expander("Methods and limitations"):
+    st.markdown("""- **Cohort:** 4,759 children aged 5–17 with caregiver-reported autism.
 
 - **Clustering method:** K-modes grouped children with similar categorical patterns, such as whether ADHD, anxiety, speech disorder or developmental delay was reported.
 
-- **How grouping worked:** Each child was assigned to the group whose typical pattern most closely matched their reported characteristics.
-
 - **Why diagnosis age was excluded:** Diagnosis age was hidden from the algorithm so that any age differences discovered afterward were not built into the groups.
 
-- **Interpretation:** These are exploratory reported profiles, not validated clinical subtypes, individual risk scores or a diagnostic model.""")
+- **Limitation:** Characteristics were reported at survey and were not necessarily present or recognized before diagnosis.""")
 st.markdown("<p class='note'>Source: 2022–2024 National Survey of Children's Health, U.S. Census Bureau / HRSA Maternal and Child Health Bureau.</p>",unsafe_allow_html=True)
