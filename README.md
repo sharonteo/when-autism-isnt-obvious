@@ -2,6 +2,10 @@
 
 An explainable machine-learning exploration of reported autism profiles associated with earlier or later diagnosis, using the 2022–2024 National Survey of Children's Health (NSCH).
 
+## Live dashboard
+
+[Explore the interactive Streamlit dashboard](https://autism-signs.streamlit.app/)
+
 ## Central finding
 
 K-modes clustering identified three reported profiles without using diagnosis age:
