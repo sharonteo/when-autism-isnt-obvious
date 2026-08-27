@@ -55,22 +55,11 @@ yp=years.pivot(index="survey_year",columns="profile",values="weighted_later_pct"
 st.line_chart(yp,color=[COLORS[p] for p in ORDER]); st.dataframe(yp.style.format("{:.1f}%"),width="stretch")
 st.markdown("<div class='callout'><b>Yes.</b> The less-obvious overlapping profile had the highest later-diagnosis rate in 2022, 2023 and 2024.</div>",unsafe_allow_html=True)
 
-st.divider(); st.subheader("What the machine learning did—and did not do")
-left,right=st.columns(2)
-with left:
-    st.markdown("""**The algorithm used**
-- Reported autism severity
-- Speech and developmental differences
-- Learning and intellectual disabilities
-- ADHD, anxiety, depression and behavior concerns
-
-Diagnosis age was deliberately excluded while profiles were formed.""")
-with right:
-    st.markdown("""**Responsible interpretation**
-- Retrospective, cross-sectional survey analysis
-- Characteristics were reported at survey—not necessarily before diagnosis
-- Association does not establish why diagnosis occurred later
-- Profiles require validation in longitudinal clinical data""")
+st.divider(); st.subheader("How to interpret these findings")
+st.markdown("""- This was a retrospective, cross-sectional analysis of caregiver-reported survey data.
+- Characteristics were reported at the time of the survey and were not necessarily present or recognized before the autism diagnosis.
+- The analysis identified associations, but it cannot explain why an individual child was diagnosed later.
+- The profiles are exploratory and require validation using longitudinal clinical data.""")
 with st.expander("Technical methods"):
     st.markdown("""- **Cohort:** 4,759 children aged 5–17 with caregiver-reported autism, a valid reported diagnosis age and a valid reported severity category.
 
