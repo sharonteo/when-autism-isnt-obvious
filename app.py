@@ -6,11 +6,16 @@ ROOT = Path(__file__).resolve().parent
 RESULTS = ROOT / "results"
 COLORS = {"Developmentally apparent":"#4f8f88","Complex multi-condition":"#6f77a8","Less-obvious overlapping":"#e48763"}
 ORDER = list(COLORS)
+PROFILE_DESCRIPTIONS = {
+    "Developmentally apparent": "More reported speech and developmental differences",
+    "Complex multi-condition": "Multiple reported developmental and behavioral conditions",
+    "Less-obvious overlapping": "Fewer developmental delays; more ADHD and anxiety",
+}
 
 st.set_page_config(page_title="When Autism Isn't Obvious", page_icon="🧠", layout="wide")
 st.markdown("""
 <style>
-.block-container{max-width:1120px;padding-top:2rem}.hero{background:linear-gradient(120deg,#eef8f6,#fff4ed);border-radius:24px;padding:34px;margin-bottom:24px}.eyebrow{color:#247a73;font-weight:750;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem}.hero h1{color:#17324d;font-size:2.55rem;line-height:1.08;margin:.35rem 0 .8rem}.hero p{font-size:1.16rem;color:#42566b;max-width:850px}.profile{background:white;border:1px solid #e4eaed;border-radius:18px;padding:20px;min-height:230px;box-shadow:0 3px 12px rgba(35,55,70,.05)}.profile h3{font-size:1.17rem;margin:0 0 9px;color:#17324d}.age{font-size:2.25rem;font-weight:800;color:#17324d}.caption{color:#617387;font-size:.88rem}.callout{border-left:5px solid #e48763;background:#fff6f1;padding:19px 23px;border-radius:9px;margin:20px 0;font-size:1.05rem}.icon-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;max-width:530px;margin:18px auto}.child{height:29px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px}.later{background:#e48763;color:white}.earlier{background:#dce9e7;color:#617876}.note{color:#65778a;font-size:.85rem}
+.block-container{max-width:1120px;padding-top:2rem}.hero{background:linear-gradient(120deg,#eef8f6,#fff4ed);border-radius:24px;padding:34px;margin-bottom:24px}.eyebrow{color:#247a73;font-weight:750;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem}.hero h1{color:#17324d;font-size:2.55rem;line-height:1.08;margin:.35rem 0 .8rem}.hero p{font-size:1.16rem;color:#42566b;max-width:850px}.profile{background:white;border:1px solid #e4eaed;border-radius:18px;padding:20px;min-height:290px;box-shadow:0 3px 12px rgba(35,55,70,.05)}.profile h3{font-size:1.17rem;margin:0 0 9px;color:#17324d}.profile-subtitle{color:#617387;font-size:.86rem;line-height:1.3;min-height:45px;margin-bottom:10px}.age{font-size:2.25rem;font-weight:800;color:#17324d}.caption{color:#617387;font-size:.88rem}.callout{border-left:5px solid #e48763;background:#fff6f1;padding:19px 23px;border-radius:9px;margin:20px 0;font-size:1.05rem}.icon-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;max-width:530px;margin:18px auto}.child{height:29px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px}.later{background:#e48763;color:white}.earlier{background:#dce9e7;color:#617876}.note{color:#65778a;font-size:.85rem}
 </style>
 """, unsafe_allow_html=True)
 
@@ -29,7 +34,9 @@ st.markdown("""<div class="hero"><div class="eyebrow">Explainable machine learni
 for column,name in zip(st.columns(3),ORDER):
     row=profiles[profiles.profile==name].iloc[0]
     with column:
-        st.markdown(f"""<div class="profile" style="border-top:6px solid {COLORS[name]}"><h3>{name}</h3><div class="age">Age {row.weighted_median_diagnosis_age:.0f}</div><div class="caption">weighted median first reported diagnosis age</div><br><b>{row.weighted_later_pct:.1f}%</b> diagnosed after age 4<br><span class="caption">{row.sample_n:,.0f} survey records</span></div>""",unsafe_allow_html=True)
+        st.markdown(f"""<div class="profile" style="border-top:6px solid {COLORS[name]}"><h3>{name}</h3><div class="profile-subtitle">{PROFILE_DESCRIPTIONS[name]}</div><div class="age">Age {row.weighted_median_diagnosis_age:.0f}</div><div class="caption">weighted median first reported diagnosis age</div><br><b>{row.weighted_later_pct:.1f}%</b> diagnosed after age 4<br><span class="caption">{row.sample_n:,.0f} survey records</span></div>""",unsafe_allow_html=True)
+
+st.caption("Profile names summarize caregiver-reported patterns and are descriptive, not recognized clinical autism subtypes.")
 
 st.markdown("""<div class="callout"><b>The discovery:</b> The less-obvious overlapping profile had a weighted median diagnosis age of 7—four years later than the developmentally apparent profile.</div>""",unsafe_allow_html=True)
 st.subheader("What characterizes each reported profile?")
