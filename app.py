@@ -73,7 +73,7 @@ year_chart = alt.Chart(years).mark_line(point=True, strokeWidth=3).encode(
 ).properties(height=360)
 st.altair_chart(year_chart, use_container_width=True)
 st.dataframe(yp.style.format("{:.1f}%"),width="stretch")
-st.markdown("<div class='callout'><b>Yes.</b> The less-obvious overlapping profile had the highest later-diagnosis rate in 2022, 2023 and 2024.</div>",unsafe_allow_html=True)
+st.markdown("<div class='callout'>The less-obvious overlapping profile had the highest later-diagnosis rate in all three survey years.</div>",unsafe_allow_html=True)
 
 st.divider()
 st.caption("Exploratory associations from caregiver-reported survey data; these profiles are not clinical subtypes and do not explain why an individual child was diagnosed later.")
