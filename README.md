@@ -41,6 +41,3 @@ streamlit run app.py
 
 This project examines population-level patterns. It does not diagnose autism, estimate an individual child's needs, or establish causation. Reported severity and co-occurring conditions were measured at survey, not necessarily before autism diagnosis; the profiles therefore cannot be used as a prospective screening tool. Full NSCH variance estimation should use the complex survey design variables and appropriate survey-analysis software.
 
-## Suggested LinkedIn story
-
-Lead with the human finding: the children who are easiest to miss may wait the longest for answers. Show the three profiles and reveal that the less-obvious overlapping profile had a median diagnosis age four years later than the developmentally apparent profile.
